@@ -6,7 +6,7 @@ library(fdrtool)
 
 # 导入差异表达基因数据
 setwd ( "E:/R课程" )
-MyGeneSet<-read.table('下调.txt',header=FALSE)
+MyGeneSet<-read.table('Up-regulated-genes.txt',header=FALSE)
 MyGeneSet$V1<-as.character(MyGeneSet$V1)
 MyGeneIDSet2=bitr(MyGeneSet$V1,fromType='SYMBOL',toType='ENTREZID',OrgDb='org.Hs.eg.db')
 head(MyGeneIDSet2)
@@ -120,10 +120,10 @@ SUM_HPO <- SUM_HPO[order(as.numeric(as.character(SUM_HPO$p_Value))),]
 
 
 # 导出表格
-write.csv(SUM_HPO,"下调1.csv",row.names = FALSE)
+write.csv(SUM_HPO,"Up-HPO.csv",row.names = FALSE)
 
 # 条形图绘制
-data <- read.csv("下调.csv",header = TRUE)
+data <- read.csv("Up-HPO.csv",header = TRUE)
 head(data)
 ggplot(data = data,aes(x =Description ,y = Count,fill = -log10(p_Value))) + geom_bar(stat="identity") + 
   scale_x_discrete(limits=data$Description) + coord_flip() + labs(title = "EnrichmentHPO") + 
